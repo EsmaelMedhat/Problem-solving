@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1707780622 source:e:\cs_50\new folder\inhirted code\main.cpp
+	<iostream>
+	<string>
+	<sstream>
+	<exception>
+

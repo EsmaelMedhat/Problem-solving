@@ -1,63 +1,49 @@
-#include <cmath>
-#include <cstdio>
-#include <vector>
 #include <iostream>
-#include <algorithm>
-#include <cassert>
+#include <string>
+#include <sstream>
+#include <exception>
 using namespace std;
 
-class Student{
-private:
-  int student_grades[5];
-
-
-public:
-  void input(){
-      for(int i=0;i<5;i++) {
-      cin>>student_grades[i];
-      }
-  }
-   int calculateTotalScore(){
-    int total_score=0;
-    for(int i=0;i<5;i++)
-    {
-      total_score+=student_grades[i];
-
-    }
-
-       return total_score;
-   }
-
-
+/* Define the exception here */
+class BadLengthException{
+int size;
+ public:
+    BadLengthException(int n){
+      size=n;
+         }
+int what(){return size;}
 
 };
 
-
-
+bool checkUsername(string username) {
+	bool isValid = true;
+	int n = username.length();
+	if(n < 5) {
+		throw BadLengthException(n);
+	}
+	for(int i = 0; i < n-1; i++) {
+		if(username[i] == 'w' && username[i+1] == 'w') {
+			isValid = false;
+		}
+	}
+	return isValid;
+}
 
 int main() {
-    int n; // number of students
-    cin >> n;
-    Student *s = new Student[n]; // an array of n students
-
-    for(int i = 0; i < n; i++){
-        s[i].input();
-    }
-
-    // calculate kristen's score
-    int kristen_score = s[0].calculateTotalScore();
-
-    // determine how many students scored higher than kristen
-    int count = 0;
-    for(int i = 1; i < n; i++){
-        int total = s[i].calculateTotalScore();
-        if(total > kristen_score){
-            count++;
-        }
-    }
-
-    // print result
-    cout << count;
-
-    return 0;
+	int T; cin >> T;
+	while(T--) {
+		string username;
+		cin >> username;
+		try {
+			bool isValid = checkUsername(username);
+			if(isValid) {
+				cout << "Valid" << '\n';
+			} else {
+				cout << "Invalid" << '\n';
+			}
+		} catch (BadLengthException e) {
+			cout << "Too short: " << e.what() << '\n';
+		}
+	}
+	return 0;
 }
