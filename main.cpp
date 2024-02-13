@@ -3,61 +3,35 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <cassert>
 using namespace std;
 
-class Student{
-private:
-  int student_grades[5];
+class Triangle{
+	public:
+		void triangle(){
+			cout<<"I am a triangle\n";
+		}
+};
 
+class Isosceles : public Triangle{
+  	public:
+  		void isosceles(){
+    		cout<<"I am an isosceles triangle\n";
+  		}
+};
 
-public:
-  void input(){
-      for(int i=0;i<5;i++) {
-      cin>>student_grades[i];
-      }
+class Equilateral:public Isosceles{
+  public:
+  void equilateral(){
+   cout<<"I am an equilateral triangle\n";
   }
-   int calculateTotalScore(){
-    int total_score=0;
-    for(int i=0;i<5;i++)
-    {
-      total_score+=student_grades[i];
-
-    }
-
-       return total_score;
-   }
-
-
 
 };
 
+int main(){
 
-
-
-int main() {
-    int n; // number of students
-    cin >> n;
-    Student *s = new Student[n]; // an array of n students
-
-    for(int i = 0; i < n; i++){
-        s[i].input();
-    }
-
-    // calculate kristen's score
-    int kristen_score = s[0].calculateTotalScore();
-
-    // determine how many students scored higher than kristen
-    int count = 0;
-    for(int i = 1; i < n; i++){
-        int total = s[i].calculateTotalScore();
-        if(total > kristen_score){
-            count++;
-        }
-    }
-
-    // print result
-    cout << count;
-
+    Equilateral eqr;
+    eqr.equilateral();
+    eqr.isosceles();
+    eqr.triangle();
     return 0;
 }
