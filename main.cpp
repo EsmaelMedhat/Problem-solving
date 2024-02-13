@@ -1,63 +1,51 @@
-#include <cmath>
-#include <cstdio>
-#include <vector>
 #include <iostream>
-#include <algorithm>
-#include <cassert>
+
 using namespace std;
-
-class Student{
-private:
-  int student_grades[5];
-
-
-public:
-  void input(){
-      for(int i=0;i<5;i++) {
-      cin>>student_grades[i];
-      }
+/*
+ * Create classes Rectangle and RectangleArea
+ */
+class Rectangle{
+  public:
+   virtual void  display()
+  {
+  cout<<width<<" "<< height<<endl;
   }
-   int calculateTotalScore(){
-    int total_score=0;
-    for(int i=0;i<5;i++)
-    {
-      total_score+=student_grades[i];
-
-    }
-
-       return total_score;
-   }
-
-
-
+    protected:
+int width,height;
 };
+class RectangleArea:public Rectangle{
 
+        public:
+   void read_input(){
+               cin>>width;cin>>height;
+          }
+void display()
+{
+int area=width*height;
+cout<<area;
+}
+};
+int main()
+{
+    /*
+     * Declare a RectangleArea object
+     */
+    RectangleArea r_area;
 
+    /*
+     * Read the width and height
+     */
+    r_area.read_input();
 
+    /*
+     * Print the width and height
+     */
+    r_area.Rectangle::display();
 
-int main() {
-    int n; // number of students
-    cin >> n;
-    Student *s = new Student[n]; // an array of n students
-
-    for(int i = 0; i < n; i++){
-        s[i].input();
-    }
-
-    // calculate kristen's score
-    int kristen_score = s[0].calculateTotalScore();
-
-    // determine how many students scored higher than kristen
-    int count = 0;
-    for(int i = 1; i < n; i++){
-        int total = s[i].calculateTotalScore();
-        if(total > kristen_score){
-            count++;
-        }
-    }
-
-    // print result
-    cout << count;
+    /*
+     * Print the area
+     */
+    r_area.display();
 
     return 0;
 }
